@@ -1,5 +1,6 @@
 import React from 'react';
 import Todo from './Todo';
+import {Paper, List} from "@material-ui/core";
 import './App.css';
 
 class App extends React.Component {
@@ -13,10 +14,19 @@ class App extends React.Component {
     };
   }
   render() {
+    // todoItems에 this.state.items.length > 0 이면 true => && 뒤에 값을 넘겨준다.
+    // -> todoItems = this.state.items.length > 0 ? (<Paper></Paper>): ""; 으로 작성해도 같은 결과(? : 조건 선택문 사용한 ver.)
+
     // javascript에서 제공하는 map 함수를 이용해 배열을 반복하여 <Todo/> Component를 여러 개 생성할 수 있다.
-    var todoItems = this.state.items.map((item, idx) => (
-      <Todo item={item} key={item.id}/>
-    ));
+    var todoItems = this.state.items.length > 0 && (
+      <Paper style={{margin: 16}}>
+        <List>
+          {this.state.items.map((item, idx) => (
+                  <Todo item={item} key={item.id}/>
+          ))}
+        </List>
+      </Paper>
+    );
 
     // 생성된 Component JSX를 리턴
     return <div className='App'>{todoItems}</div>;
