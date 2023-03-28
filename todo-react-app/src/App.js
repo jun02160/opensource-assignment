@@ -8,7 +8,7 @@ class App extends React.Component {
     this.state = {
       items : [
         {id: 0, title: "Todo 1 ", done: false},  // item에 item.id, item.title, item.done 매개변수 이름과 값을 할당
-        {id: 1, titile: "Todo 2", done: false},
+        {id: 1, title: "Todo 2", done: false},
       ],
     };
   }
