@@ -1,6 +1,7 @@
 import React from 'react';
 import Todo from './Todo';
-import {Paper, List} from "@material-ui/core";
+import Addtodo from './AddTodo';
+import {Paper, List, Container} from "@material-ui/core";
 import './App.css';
 
 class App extends React.Component {
@@ -13,6 +14,17 @@ class App extends React.Component {
       ],
     };
   }
+
+  // (1) add 함수 추가
+  add = (item) => {
+    const thisItems = this.state.items;
+    item.id = "ID-"+thisItems.length;  // key를 위한 id 추가
+    item.done = false;
+    thisItems.push(item);
+    this.setState({items: thisItems});  // update state
+    console.log("items: ", this.state.items);
+  }
+
   render() {
     // todoItems에 this.state.items.length > 0 이면 true => && 뒤에 값을 넘겨준다.
     // -> todoItems = this.state.items.length > 0 ? (<Paper></Paper>): ""; 으로 작성해도 같은 결과(? : 조건 선택문 사용한 ver.)
@@ -27,6 +39,16 @@ class App extends React.Component {
         </List>
       </Paper>
     );
+
+    // (2) add 함수 연결
+    return (
+      <div className='App'>
+        <Container maxWidth="md">
+          <Addtodo add={this.add}/>
+          <div className='TodoList'>{todoItems}</div>
+        </Container>
+      </div>
+    )
 
     // 생성된 Component JSX를 리턴
     return <div className='App'>{todoItems}</div>;
